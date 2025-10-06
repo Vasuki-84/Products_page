@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { ShoppingCart } from 'lucide-react';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [Cart, setCart] = useState(0);
 
-  {
-    /* Component Life cycle methods - 1. ComponentMOUNT 2. ComponentUPDATE 3. ComponentUNMOUNT 
-       useEffect - */
-  }
+  const addToCart = () => {
+    setCart(Cart + 1);
+  };
 
   useEffect(() => {
     // mounting
@@ -20,6 +21,12 @@ function Products() {
       <h3 className="text-2xl md:text-3xl font-bold text-center mb-6">
         Our Products
       </h3>
+      <div className="relative ... flex justify-end p-2">
+        <p><ShoppingCart size={40} /></p>
+        <div className="absolute bottom-8 right-0 ..." ><h2 className="bg-yellow-300 px-2 py-1  rounded-full">{Cart}</h2></div>
+          
+      </div>
+    
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mb-3">
         {products.map((product) => (
           <div
@@ -33,17 +40,19 @@ function Products() {
             />
             <h4 className="text-xl font-semibold">{product.title}</h4>
             {/* <p className="text-gray-600 mt-2 text-sm">{product.description}</p> */}
-            <div className="flex flex-col  items-center mt-2">
+            <div className="flex flex-col  items-center mt-auto">
               <div className="flex flex-row gap-30  ">
                 <p className="text-xl font-bold">${product.price}</p>
-                <p className="text-xl text-white bg-red-500 px-2 rounded  ">
+                <p className=" text-white bg-red-500 px-2 rounded  ">
                   ⭐{product.rating.rate}
                 </p>
               </div>
-              <button className="bg-blue-500 px-5 py-2 cursor-pointer text-white rounded text-lg mt-4">
-                Buy now
+              <button
+                onClick={addToCart}
+                className="bg-blue-500 px-5 py-1 cursor-pointer text-white rounded text-lg mt-4"
+              >
+                Add To Cart
               </button>
-             
             </div>
           </div>
         ))}

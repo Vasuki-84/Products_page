@@ -9,6 +9,7 @@ function Navbar() {
       {
         productsNav.map(navLink => (
             <a key={navLink.id}>{navLink.name}</a>
+          
         )) }
         </div>
     </div>
