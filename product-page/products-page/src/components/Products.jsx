@@ -118,7 +118,7 @@ function Products() {
               </div>
               <button
                 onClick={addToCart}
-                className="bg-blue-500 px-5 py-1 cursor-pointer text-white rounded text-lg mt-4"
+                className="bg-yellow-500 px-5 py-1 cursor-pointer text-white rounded text-lg mt-4"
               >
                 Add To Cart
               </button>
