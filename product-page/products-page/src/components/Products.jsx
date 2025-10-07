@@ -23,12 +23,12 @@ function Products() {
         ? true
         : product.category.toLowerCase() === category.toLowerCase()
     )
-     .sort((a, b) => {
-    if (sortOption === "price-low") return a.price - b.price;
-    if (sortOption === "price-high") return b.price - a.price;
-    if (sortOption === "rating") return b.rating.rate - a.rating.rate;
-    return 0; 
-  });
+    .sort((a, b) => {
+      if (sortOption === "price-low") return a.price - b.price;
+      if (sortOption === "price-high") return b.price - a.price;
+      if (sortOption === "rating") return b.rating.rate - a.rating.rate;
+      return 0;
+    });
 
   useEffect(() => {
     // mounting
@@ -43,51 +43,55 @@ function Products() {
       <h3 className="text-2xl md:text-3xl font-bold text-center mb-6">
         Our Products
       </h3>
-      {/* add to cart icon */}
-      <div className="relative ... flex justify-end p-2">
-        <p>
-          <ShoppingCart size={40} />
-        </p>
-        <div className="absolute bottom-8 right-0 ...">
-          <h2 className="bg-yellow-300 px-2 py-1  rounded-full">{Cart}</h2>
-        </div>
-      </div>
 
-      {/* input field */}
-      <select
-        className="border p-2 rounded mb-3"
-        onChange={(e) => setSortOption(e.target.value)}
-        value={sortOption}
-      >
-        <option value="">Sort By</option>
-        <option value="price-low">Price: Low → High</option>
-        <option value="price-high">Price: High → Low</option>
-        <option value="rating">Rating: High → Low</option>
-      </select>
+  
 
-      <input
-        type="text"
-        placeholder="Search name..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="border p-2 rounded"
-      />
-      {/* Category button */}
-      <div className="p-3">
-        <select
-          className="border p-1 rounded-full bg-blue-200 px-4"
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="electronics">electronics</option>
-          <option value="jewelery">jewelery</option>
-          <option value="men's clothing">men's clothing</option>
-          <option value="women's clothing">women's clothing</option>
-        </select>
-      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 items-center p-4 bg-gray-100 rounded-2xl shadow-md">
+  {/* Add to cart icon */}
+  <div className="relative flex justify-center items-center p-2 bg-white rounded-xl shadow hover:bg-yellow-100 transition text-3xl font-semibold"> CART 
+    <ShoppingCart size={36} className="text-yellow-600" />
+    <div className="absolute top-1 right-1 bg-yellow-400 text-black text-xs font-bold px-2 py-0.5 rounded-full">
+      {Cart}
+    </div>
+  </div>
+
+  {/* Sort option */}
+  <select
+    className="border border-gray-400 focus:border-pink-600 text-sm sm:text-base px-3 py-2 rounded-xl bg-black text-white cursor-pointer w-full shadow hover:scale-105 transition"
+    onChange={(e) => setSortOption(e.target.value)}
+    value={sortOption}
+  >
+    <option value="">Sort By</option>
+    <option value="price-low">Price: Low to High</option>
+    <option value="price-high">Price: High to Low</option>
+    <option value="rating">Rating: High to Low</option>
+  </select>
+
+  {/* Search option */}
+  <input
+    type="text"
+    placeholder="🔍 Search name..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="border border-gray-400 focus:border-pink-600 text-sm sm:text-base px-3 py-2 rounded-xl shadow w-full hover:scale-105 transition"
+  />
+
+  {/* Category dropdown */}
+  <select
+    className="border border-gray-400 focus:border-pink-600 text-sm sm:text-base px-3 py-2 rounded-xl bg-black text-white cursor-pointer shadow hover:scale-105 transition"
+    onChange={(e) => setCategory(e.target.value)}
+  >
+    <option value="All">All</option>
+    <option value="electronics">Electronics</option>
+    <option value="jewelery">Jewelery</option>
+    <option value="men's clothing">Men's Clothing</option>
+    <option value="women's clothing">Women's Clothing</option>
+  </select>
+</div>
+
 
       {/* general category */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mb-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mb-3 mt-5">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
