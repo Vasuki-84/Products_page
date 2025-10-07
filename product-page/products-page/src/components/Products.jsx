@@ -5,6 +5,8 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [Cart, setCart] = useState(0);
   const [category, setCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
   // Add to cart
   const addToCart = () => {
@@ -12,11 +14,21 @@ function Products() {
   };
 
   // filter by product's name , category , price , rating
-  const filteredProducts = products.filter((product) =>
-    category === "All"
-      ? true
-      : product.category.toLowerCase() === category.toLowerCase()
-  );
+  const filteredProducts = products
+    .filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((product) =>
+      category === "All"
+        ? true
+        : product.category.toLowerCase() === category.toLowerCase()
+    )
+     .sort((a, b) => {
+    if (sortOption === "price-low") return a.price - b.price;
+    if (sortOption === "price-high") return b.price - a.price;
+    if (sortOption === "rating") return b.rating.rate - a.rating.rate;
+    return 0; 
+  });
 
   useEffect(() => {
     // mounting
@@ -41,6 +53,25 @@ function Products() {
         </div>
       </div>
 
+      {/* input field */}
+      <select
+        className="border p-2 rounded mb-3"
+        onChange={(e) => setSortOption(e.target.value)}
+        value={sortOption}
+      >
+        <option value="">Sort By</option>
+        <option value="price-low">Price: Low → High</option>
+        <option value="price-high">Price: High → Low</option>
+        <option value="rating">Rating: High → Low</option>
+      </select>
+
+      <input
+        type="text"
+        placeholder="Search name..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="border p-2 rounded"
+      />
       {/* Category button */}
       <div className="p-3">
         <select
@@ -54,17 +85,6 @@ function Products() {
           <option value="women's clothing">women's clothing</option>
         </select>
       </div>
-
-      {/* Product List */}
-      {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-        {filterProducts.map((product) => (
-          <div key={product.id} className="border p-3 rounded shadow">
-            <img src={product.image} alt={product.title} className="h-32 mx-auto object-contain" />
-            <h3 className="text-sm font-semibold mt-2 line-clamp-1">{product.title}</h3>
-            <p className="text-lg font-bold">${product.price}</p>
-          </div>
-        ))}
-      </div> */}
 
       {/* general category */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mb-3">
