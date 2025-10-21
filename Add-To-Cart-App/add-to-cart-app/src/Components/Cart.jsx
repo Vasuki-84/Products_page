@@ -4,7 +4,7 @@ import { removefromCart } from '../redux/cartSlice';
 
 function Cart() {
   const {items, totalAmount} = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   return (
     <div className='p-8 bg-gray-50 min-h-screen'>
       <h1 className='text-3xl font-bold mb-6 text-center'>Your Cart</h1>
@@ -24,7 +24,7 @@ function Cart() {
                       <div>
                         <h2 className='font-semibold text-gray-800'>{data.title}</h2>
                         <p className='text-sm text-gray-500'>{data.quantity}</p>
-                        <p className='text-indigo-600 font-bold text-lg'>{data.price}</p>
+                        <p className='text-indigo-600 font-bold text-lg'>${data.price}</p>
                       </div>
                     </div>
                     <button className='text-red-500 cursor-pointer' onClick={() => dispatch(removefromCart(data.id))}>Remove</button>
