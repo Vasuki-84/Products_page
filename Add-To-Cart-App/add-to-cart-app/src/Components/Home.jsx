@@ -1,7 +1,7 @@
 import React from 'react'
 import { toast } from 'react-toastify'
-// import { useDispatch } from 'react-redux'
-// import { addtoCart } from '../redux/cartSlice'
+import { useDispatch } from 'react-redux'
+import { addtoCart } from '../redux/cartSlice'
 
 const products = [
   {
@@ -31,8 +31,9 @@ const products = [
 ]
 
 function Home() {
+    const dispatch = useDispatch();
   const handleaddtoCart = (product) => {
-    // dispatch(addtoCart(product));
+     dispatch(addtoCart(product));
     toast.success(`${product.title} added to your cart`);
   }
   
