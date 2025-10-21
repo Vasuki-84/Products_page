@@ -31,7 +31,10 @@ const products = [
 ]
 
 function Home() {
- 
+  const handleaddtoCart = (product) => {
+    // dispatch(addtoCart(product));
+    toast.success(`${product.title} added to your cart`);
+  }
   
   return (
     <div className='p-8 bg-gray-50 min-h-screen'>
